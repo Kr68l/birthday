@@ -1,0 +1,620 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>С днём рождения, Лерочка!</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #ffe1ed, #f8c5dc, #fce8f0);
+    color: #793b59;
+    overflow-x: hidden;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* Фоновые сердечки */
+
+.heart {
+    position: fixed;
+    bottom: -40px;
+    color: rgba(255,255,255,0.7);
+    animation: float 9s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0);
+        opacity: 0;
+    }
+    20% { opacity: 1; }
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Главный экран */
+
+.screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+.welcome {
+    text-align: center;
+    max-width: 750px;
+    animation: appear 1.2s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.small-title {
+    font-size: 14px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #ad6284;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(65px, 11vw, 115px);
+    color: #b94e7c;
+    font-weight: normal;
+    line-height: 1.2;
+    text-shadow: 2px 4px 15px rgba(185,78,124,0.15);
+}
+
+.age {
+    font-size: clamp(65px, 12vw, 110px);
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 5px 20px #d985a9;
+    margin: 5px 0 15px;
+}
+
+.subtitle {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #92506d;
+    margin-bottom: 35px;
+}
+
+.main-btn {
+    border: none;
+    background: linear-gradient(135deg, #d85d91, #b94e7c);
+    color: white;
+    padding: 17px 40px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: 0 8px 25px rgba(185,78,124,0.3);
+    transition: .3s;
+}
+
+.main-btn:hover {
+    transform: translateY(-5px) scale(1.04);
+    box-shadow: 0 12px 30px rgba(185,78,124,0.4);
+}
+
+/* Секция карточек */
+
+.gallery-section {
+    display: none;
+    min-height: 100vh;
+    padding: 50px 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.gallery-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(45px, 7vw, 70px);
+    color: #b94e7c;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.gallery-subtitle {
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    color: #a35b7a;
+    text-align: center;
+}
+
+/* Карточка */
+
+.card {
+    width: min(100%, 430px);
+    min-height: 570px;
+    background: rgba(255,255,255,0.88);
+    border: 1px solid rgba(255,255,255,0.8);
+    border-radius: 28px;
+    padding: 18px;
+    box-shadow: 0 20px 60px rgba(156,65,105,0.17);
+    animation: cardAppear .5s ease;
+    text-align: center;
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateX(35px) scale(.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+.photo {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 20px;
+    background: #f6d2e1;
+    display: block;
+}
+
+.card-number {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #c37a99;
+    margin-top: 20px;
+}
+
+.card h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 39px;
+    color: #bd5681;
+    font-weight: normal;
+    margin: 10px 0;
+}
+
+.card p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #86526a;
+    padding: 0 8px 10px;
+}
+
+/* Навигация */
+
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.nav-btn {
+    border: none;
+    padding: 14px 25px;
+    border-radius: 40px;
+    background: #fff;
+    color: #b94e7c;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(156,65,105,0.12);
+    transition: .3s;
+}
+
+.nav-btn:hover {
+    background: #b94e7c;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.nav-btn:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.counter {
+    font-size: 13px;
+    color: #a35b7a;
+    min-width: 55px;
+    text-align: center;
+}
+
+/* Финал */
+
+.final-message {
+    display: none;
+    text-align: center;
+    max-width: 650px;
+    animation: appear 1s ease;
+}
+
+.final-message h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(55px, 9vw, 90px);
+    color: #b94e7c;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+.final-message p {
+    font-size: 16px;
+    line-height: 2;
+    color: #89506b;
+    margin-bottom: 25px;
+}
+
+.final-heart {
+    font-size: 65px;
+    animation: beat 1s infinite;
+}
+
+@keyframes beat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* Конфетти */
+
+.confetti {
+    position: fixed;
+    top: -20px;
+    width: 9px;
+    height: 13px;
+    z-index: 10;
+    animation: fall 4s linear forwards;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@media(max-width: 480px) {
+    .card {
+        min-height: auto;
+    }
+
+    .photo {
+        height: 310px;
+    }
+
+    .navigation {
+        gap: 10px;
+    }
+
+    .nav-btn {
+        padding: 13px 18px;
+        font-size: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Плавающие сердечки -->
+<div id="hearts"></div>
+
+<!-- Первый экран -->
+<section class="screen" id="welcomeScreen">
+    <div class="welcome">
+        <div class="small-title">A special day for a special girl</div>
+
+        <h1>С днём рождения,</h1>
+
+        <div class="age">19</div>
+
+        <h1>Лерочка!</h1>
+
+        <p class="subtitle">
+            Сегодня твой день!<br>
+            И я приготовила для тебя кое-что особенное...
+        </p>
+
+        <button class="main-btn" onclick="startGallery()">
+            Открыть поздравление ♥
+        </button>
+    </div>
+</section>
+
+<!-- Галерея -->
+<section class="gallery-section" id="gallerySection">
+
+    <h2 class="gallery-title">Наши прекрасные моменты</h2>
+
+    <p class="gallery-subtitle">
+        LITTLE MEMORIES · BIG EMOTIONS
+    </p>
+
+    <div class="card" id="card">
+        <img class="photo" id="photo" src="" alt="Фотография">
+
+        <div class="card-number" id="cardNumber"></div>
+
+        <h2 id="cardTitle"></h2>
+
+        <p id="cardText"></p>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeCard(-1)">
+            ← Назад
+        </button>
+
+        <div class="counter" id="counter">1 / 5</div>
+
+        <button class="nav-btn" id="nextBtn" onclick="changeCard(1)">
+            Далее →
+        </button>
+    </div>
+
+</section>
+
+<!-- Финальное поздравление -->
+<section class="screen" id="finalScreen" style="display:none">
+
+    <div class="final-message" id="finalMessage">
+
+        <div class="final-heart">♥</div>
+
+        <h2>С 19-летием!</h2>
+
+        <p>
+            Лерочка, пусть твоя жизнь будет наполнена
+            счастьем, любовью, искренними моментами с близкими
+            и невероятными приключениями!
+
+            <br><br>
+
+            Желаю тебе исполнения самых заветных желани(сдача абитура и милион денях прилогается),
+            море красивых моментов, больше встреч со мной )
+            и бесконечных поводов улыбаться, давай в этом году будешь плакать только от радости!!!
+
+            <br><br>
+
+            Оставайся такой же прекрасной!
+            Пусть каждый новый день будет лучше предыдущего.
+        </p>
+
+        <div class="final-heart">♥</div>
+
+        <button class="main-btn" onclick="restart()">
+            Посмотреть ещё раз
+        </button>
+
+    </div>
+</section>
+
+<script>
+
+// ФОТОГРАФИИ И ТЕКСТЫ КАРТОЧЕК
+// Замени ссылки на свои фотографии
+
+const cards = [
+
+    {
+        photo: "https://res.cloudinary.com/djneaguov/image/upload/v1794262637/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-11-10_%D0%BE_00.16.49_hstn98.png",
+        title: "Ты прекрасна!",
+        text: "Пускай ты  увидишь в себе ту невероятную красоту, которую вижу я в тебе!"
+    },
+
+    {
+        photo: "https://res.cloudinary.com/djneaguov/image/upload/v1794262547/2026-11-10_00.14.26_nojxr7.jpg",
+        title: "Будь самой счастливой девочкой в мире!",
+        text: "Желаю тебе как можно больше счастливых моментов, искреннего смеха и улыбок."
+    },
+
+    {
+        photo: "https://res.cloudinary.com/djneaguov/image/upload/v1794262549/2026-11-10_00.09.12_scfagm.jpg",
+        title: "Пусть тебе не будут попадатся долюоебы",
+        text: "Все мужчины которых ты встретишь, будут достойными тебя и будут понимать какая это ценность просто быть рядом"
+    },
+
+    {
+        photo: "https://res.cloudinary.com/djneaguov/image/upload/v1794262641/2026-11-10_00.15.59_ul1ro5.jpg",
+        title: "Ты самое лучше солнышко в мире)))",
+        text: "Никогда не забывай, насколько ты особенная. Ты заслуживаешь всего самого лучшего."
+    },
+
+    {
+        photo: "https://res.cloudinary.com/djneaguov/image/upload/v1794262638/2026-11-10_00.16.11_hzv5yd.jpg",
+        title: "С твоим 19-ти летием!",
+        text: "Пусть 19 лет станут началом невероятной главы твоей жизни, полной приключений и исполнением всех самых заветных желаний)!"
+    }
+
+];
+
+let currentCard = 0;
+
+// Запуск поздравления
+
+function startGallery() {
+    document.getElementById("welcomeScreen").style.display = "none";
+    document.getElementById("gallerySection").style.display = "flex";
+
+    showCard();
+}
+
+// Отображение карточки
+
+function showCard() {
+
+    const card = cards[currentCard];
+
+    const element = document.getElementById("card");
+
+    // Перезапуск анимации
+    element.style.animation = "none";
+    void element.offsetWidth;
+    element.style.animation = "cardAppear .5s ease";
+
+    document.getElementById("photo").src = card.photo;
+    document.getElementById("cardTitle").textContent = card.title;
+    document.getElementById("cardText").textContent = card.text;
+
+    document.getElementById("cardNumber").textContent =
+        "MEMORY № " + (currentCard + 1);
+
+    document.getElementById("counter").textContent =
+        (currentCard + 1) + " / " + cards.length;
+
+    document.getElementById("prevBtn").disabled =
+        currentCard === 0;
+
+    document.getElementById("nextBtn").textContent =
+        currentCard === cards.length - 1 ? "Финал ♥" : "Далее →";
+}
+
+// Перелистывание
+
+function changeCard(direction) {
+
+    currentCard += direction;
+
+    if (currentCard < 0) {
+        currentCard = 0;
+    }
+
+    if (currentCard >= cards.length) {
+        showFinal();
+        return;
+    }
+
+    showCard();
+}
+
+// Финал
+
+function showFinal() {
+
+    document.getElementById("gallerySection").style.display = "none";
+    document.getElementById("finalScreen").style.display = "flex";
+    document.getElementById("finalMessage").style.display = "block";
+
+    createConfetti();
+}
+
+// Перезапуск
+
+function restart() {
+
+    currentCard = 0;
+
+    document.getElementById("finalScreen").style.display = "none";
+    document.getElementById("welcomeScreen").style.display = "flex";
+
+}
+
+// Плавающие сердечки
+
+function createHearts() {
+
+    const container = document.getElementById("hearts");
+
+    setInterval(() => {
+
+        const heart = document.createElement("div");
+
+        heart.className = "heart";
+        heart.innerHTML = Math.random() > 0.5 ? "♥" : "♡";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (15 + Math.random() * 25) + "px";
+        heart.style.animationDuration = (6 + Math.random() * 7) + "s";
+
+        container.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 13000);
+
+    }, 500);
+
+}
+
+// Конфетти
+
+function createConfetti() {
+
+    const colors = ["#ff80ab", "#ffd166", "#ffffff", "#d98cb3", "#f48fb1"];
+
+    for (let i = 0; i < 120; i++) {
+
+        const confetti = document.createElement("div");
+
+        confetti.className = "confetti";
+
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.background = colors[
+            Math.floor(Math.random() * colors.length)
+        ];
+
+        confetti.style.animationDuration =
+            (2 + Math.random() * 4) + "s";
+
+        confetti.style.animationDelay =
+            Math.random() * 2 + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 7000);
+
+    }
+
+}
+
+// Листание стрелками клавиатуры
+
+document.addEventListener("keydown", (event) => {
+
+    if (document.getElementById("gallerySection").style.display === "flex") {
+
+        if (event.key === "ArrowRight") changeCard(1);
+        if (event.key === "ArrowLeft") changeCard(-1);
+
+    }
+
+});
+
+createHearts();
+
+</script>
+
+</body>
+</html>
